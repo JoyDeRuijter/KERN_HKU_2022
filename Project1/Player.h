@@ -7,15 +7,26 @@ class Player
 {
 	private:
 		Vector2f position;
-		RectangleShape playerShape;
+		//RectangleShape playerShape;
 		float playerSpeed = .3f;
+		int lanePosition = 1;
+
+		Texture playerTexture;
+		Sprite playerSprite;
 
 	public:
-		Player(float startX, float startY);
+		Player(int startLane);
+
+		void InitializeTextureAndSprite();
+
 		FloatRect getPosition();
-		RectangleShape& getShape();
+		Sprite& getSprite();
 		void moveLeft();
 		void moveRight();
+		float getLanePosition();
 		void update();
+
+		bool leftKeyIsPressed = false;
+		bool rightKeyIsPressed = false;
 };
 

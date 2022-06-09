@@ -7,21 +7,22 @@ class Car
 {
 	private:
 		Vector2f position;
-		RectangleShape carShape;
+		Texture carTexture;
+		Sprite carSprite;
 
 		float xVelocity = 0;
-		float yVelocity = .5f;
-		int lanePosition;
+		float yVelocity = .4f;
+		int lanePosition = 0;
 
 	public:
-		Car(float startX, float startY);
+		Car(float startX);
+
+		void InitializeTextureAndSprite();
+
 		FloatRect getPosition();
-		RectangleShape& getShape();
+		Sprite& getSprite();
 		float getXPosition(int windowWidth);
 		void setXPosition(float xPosition);
-		void reboundSides();
-		void reboundPlayerOrTop();
-		void hitBottom();
 		void update();
 };
 

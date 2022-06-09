@@ -1,43 +1,52 @@
 #include "Car.h"
 #include <iostream>
 
-Car::Car(float startX, float startY)
+Car::Car(float startX)
 {
 	position.x = startX;
-	position.y = startY;
-
-	carShape.setSize(sf::Vector2f(75, 100));
-	carShape.setPosition(position);
+	position.y = 90;
 }
+
+void Car::InitializeTextureAndSprite()
+{
+	if (carTexture.loadFromFile("Textures/Player2.png"))
+	{
+		carTexture.setSmooth(false);
+		carTexture.setRepeated(false);
+
+		carSprite.setTexture(carTexture);
+	}
+}
+
 
 FloatRect Car::getPosition()
 {
-	return carShape.getGlobalBounds();
+	return carSprite.getGlobalBounds();
 }
 
-RectangleShape& Car::getShape()
+Sprite& Car::getSprite()
 {
-	return carShape;
+	return carSprite;
 }
 
 float Car::getXPosition(int windowWidth)
 {
-	float xPosition;
+	float xPosition = 0;
 	lanePosition = rand() % 4;
 
 	switch(lanePosition)
 	{
 		case 0:
-			xPosition = windowWidth/5;
+			xPosition = 1024 / 5 - 28;
 			break;
 		case 1:
-			xPosition = windowWidth/5 * 2;
+			xPosition = 1024 / 5 * 2 - 28;
 			break;
 		case 2:
-			xPosition = windowWidth/5 * 3;
+			xPosition = 1024 / 5 * 3 - 28;
 			break;
 		case 3:
-			xPosition = windowWidth/5 *4;
+			xPosition = 1024 / 5 * 4 - 28;
 			break;
 	}
 	return xPosition;
@@ -48,27 +57,10 @@ void Car::setXPosition(float xPosition)
 	position.x = xPosition;
 }
 
-void Car::reboundSides()
-{
-	xVelocity = -xVelocity;
-}
-
-void Car::reboundPlayerOrTop()
-{
-	position.y -= (yVelocity * 30);
-	yVelocity = -yVelocity;
-}
-
-void Car::hitBottom()
-{
-	position.y = 1;
-	position.x = 500;
-}
-
 void Car::update()
 {
 	position.y += yVelocity;
 	position.x += xVelocity;
 
-	carShape.setPosition(position);
+	carSprite.setPosition(position);
 }
