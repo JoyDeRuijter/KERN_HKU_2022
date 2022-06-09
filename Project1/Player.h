@@ -13,7 +13,7 @@ class Player
 	public:
 		Player(float startX, float startY);
 		FloatRect getPosition();
-		RectangleShape getShape();
+		RectangleShape& getShape();
 		void moveLeft();
 		void moveRight();
 		void update();
