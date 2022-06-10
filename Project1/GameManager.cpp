@@ -127,7 +127,7 @@ void GameManager::AddScore()
 
 void GameManager::ReduceLives()
 {
-	if (lives-- > 0)
+	if (lives - 1 > 0)
 	{
 		lives--;
 		SetHud();
