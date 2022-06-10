@@ -1,15 +1,17 @@
 #pragma once
 #include <Vector>
+#include "Roaduser.h"
 #include "Car.h"
-#include "Player.h"
+#include "CarNPC.h"
+#include "CarPlayer.h"
 
 using namespace sf;
 
 class GameManager
 {
 	private:
-		std::vector<Car*> cars;
-		int carAmount = 2;
+		std::vector<CarNPC*> carNPCs;
+		int carNPCAmount = 2;
 		
 		int score = 0;
 		int lives = 50;
@@ -23,31 +25,32 @@ class GameManager
 	public:
 		GameManager();
 
+		void draw();
+		void update();
+
 		bool gameIsOver = false;
 
 		int windowHeight = 0;
 		int windowWidth = 0;
-		void InitializeRenderWindow();
-		RenderWindow& GetRenderWindow();
-		void DrawBackground();
+		void initializeRenderWindow();
+		RenderWindow& getRenderWindow();
+		void drawBackground();
+		void deleteCarNPC(CarNPC* carNPC);
+		void addCarNPC();
+		void updateCarNPCs();
+		void drawCarNPCs();
+		void manageAmountOfCarNPCs();
+		void checkCollisions();
+		CarPlayer* player;
+		void initializePlayer();
+		void updatePlayer();
+		void drawPlayer();
 
-		void DeleteCar(Car* car);
-		void AddCar();
-		void UpdateCars();
-		void DrawCars();
-		void ManageAmountOfCars();
-		void CheckCarCollisions();
-
-		Player player = Player(1);
-		void InitializePlayer();
-		void UpdatePlayer();
-		void DrawPlayer();
-
-		void InitializeFont();
-		void SetHud();
-		void DrawHud();
-		void AddScore();
-		void ReduceLives();
-		void GameOver();
+		void initializeFont();
+		void setHud();
+		void drawHud();
+		void addScore();
+		void reduceLives();
+		void gameOver();
 };
 

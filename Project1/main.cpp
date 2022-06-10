@@ -10,49 +10,37 @@ int main()
 {
     GameManager gameManager;
 
-    
-    gameManager.InitializeRenderWindow();
-    gameManager.InitializePlayer();
-    gameManager.InitializeFont();
-
-    gameManager.SetHud();
-    gameManager.ManageAmountOfCars();
-
-    while (gameManager.GetRenderWindow().isOpen())
+    while (gameManager.getRenderWindow().isOpen())
     {
         Event event;
-        while (gameManager.GetRenderWindow().pollEvent(event))
+        while (gameManager.getRenderWindow().pollEvent(event))
         {
             if (event.type == Event::Closed)
-                gameManager.GetRenderWindow().close();
+                gameManager.getRenderWindow().close();
 
             if (event.type == sf::Event::KeyPressed)
             {
                 if (event.key.code == sf::Keyboard::Left && !gameManager.gameIsOver)
-                    gameManager.player.moveLeft();
+                    gameManager.player->moveLeft();
 
                 else if (event.key.code == sf::Keyboard::Right && !gameManager.gameIsOver)
-                    gameManager.player.moveRight();
+                    gameManager.player->moveRight();
 
                 else if (Keyboard::isKeyPressed(Keyboard::Escape))
-                    gameManager.GetRenderWindow().close();
+                    gameManager.getRenderWindow().close();
             }
         }
 
         if (gameManager.gameIsOver)
             continue;
 
-        gameManager.CheckCarCollisions();
+        gameManager.update();
 
-        gameManager.UpdateCars();
-        gameManager.UpdatePlayer();
+        gameManager.getRenderWindow().clear(Color(26, 128, 182, 255));
+        
+        gameManager.draw();
 
-        gameManager.GetRenderWindow().clear(Color(26, 128, 182, 255));
-        gameManager.DrawBackground();
-        gameManager.DrawHud();
-        gameManager.DrawCars();
-        gameManager.DrawPlayer();
-        gameManager.GetRenderWindow().display();
+        gameManager.getRenderWindow().display();
     }
     return 0;
 }

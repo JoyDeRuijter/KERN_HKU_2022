@@ -1,28 +1,18 @@
 #pragma once
+#include "Roaduser.h"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
 
-class Car
+class Car : public Roaduser
 {
-	private:
-		Vector2f position;
-		Texture carTexture;
-		Sprite carSprite;
-
-		float xVelocity = 0;
-		float yVelocity = .4f;
-		int lanePosition = 0;
+	protected:
+		int startLane = 0;
+		int currentLane = 0;
+		std::vector<float> lanePositions;
 
 	public:
-		Car(float startX);
-
-		void InitializeTextureAndSprite();
-
-		FloatRect getPosition();
-		Sprite& getSprite();
-		float getXPosition(int windowWidth);
-		void setXPosition(float xPosition);
-		void update();
+		Car();
+		void initializeLanePositions();
 };
 

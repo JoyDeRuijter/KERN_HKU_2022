@@ -2,9 +2,32 @@
 #include <sstream>
 #include <iostream>
 
-GameManager::GameManager(){}
+GameManager::GameManager()
+{
+	initializeRenderWindow();
+	initializePlayer();
+	initializeFont();
 
-void GameManager::InitializeRenderWindow()
+	setHud();
+	manageAmountOfCarNPCs();
+}
+
+void GameManager::draw()
+{
+	drawBackground();
+	drawHud();
+	drawCarNPCs();
+	drawPlayer();
+}
+
+void GameManager::update()
+{
+	checkCollisions();
+	updateCarNPCs();
+	updatePlayer();
+}
+
+void GameManager::initializeRenderWindow()
 {
 	windowWidth = 1024;
 	windowHeight = 768;
@@ -20,83 +43,81 @@ void GameManager::InitializeRenderWindow()
 	window.create(VideoMode(windowWidth, windowHeight), "Speed Racer - Joy de Ruijter");
 }
 
-RenderWindow& GameManager::GetRenderWindow()
+RenderWindow& GameManager::getRenderWindow()
 {
 	return window;
 }
 
-void GameManager::DrawBackground()
+void GameManager::drawBackground()
 {
 	window.draw(backgroundSprite);
 }
 
-void GameManager::DeleteCar(Car* car)
+void GameManager::deleteCarNPC(CarNPC* carNPC)
 {
-	cars.erase(std::remove(cars.begin(), cars.end(), car), cars.end());
-	ManageAmountOfCars();
+	carNPCs.erase(std::remove(carNPCs.begin(), carNPCs.end(), carNPC), carNPCs.end());
+	manageAmountOfCarNPCs();
 }
 
-void GameManager::AddCar()
+void GameManager::addCarNPC()
 {
-	Car* car = new Car(0);
-	car->InitializeTextureAndSprite();
-	car->setXPosition(car->getXPosition(1024));
-	cars.push_back(car);
+	CarNPC* carNPC = new CarNPC();
+	carNPC->initializeLanePositions();
+	carNPCs.push_back(carNPC);
 }
 
-void GameManager::UpdateCars()
+void GameManager::updateCarNPCs()
 {
-	for (int i = 0; i < cars.size(); i++)
-		cars[i]->update();
+	for (int i = 0; i < carNPCs.size(); i++)
+		carNPCs[i]->update();
 }
 
-void GameManager::DrawCars()
+void GameManager::drawCarNPCs()
 {
-	for (int i = 0; i < cars.size(); i++)
-		window.draw(cars[i]->getSprite());
+	for (int i = 0; i < carNPCs.size(); i++)
+		window.draw(carNPCs[i]->getSprite());
 }
 
-void GameManager::ManageAmountOfCars()
+void GameManager::manageAmountOfCarNPCs()
 {
-	while (cars.size() < carAmount)
-		AddCar();
+	while (carNPCs.size() < carNPCAmount)
+		addCarNPC();
 }
 
-void GameManager::CheckCarCollisions()
+void GameManager::checkCollisions()
 {
-	for (int i = 0; i < cars.size(); i++)
+	for (int i = 0; i < carNPCs.size(); i++)
 	{
-		if (cars[i]->getPosition().top > windowHeight)
+		if (carNPCs[i]->getPosition().top > windowHeight)
 		{
-			DeleteCar(cars[i]);
-			AddScore();
+			deleteCarNPC(carNPCs[i]);
+			addScore();
 		}
 
-		if (cars[i]->getPosition().intersects(player.getPosition()))
+		if (carNPCs[i]->getPosition().intersects(player->getPosition()))
 		{
-			ReduceLives();
-			DeleteCar(cars[i]);
+			reduceLives();
+			deleteCarNPC(carNPCs[i]);
 		}
 	}
 }
 
-void GameManager::InitializePlayer()
+void GameManager::initializePlayer()
 {
-	player = Player(1);
-	player.InitializeTextureAndSprite();
+	player = new CarPlayer();
 }
 
-void GameManager::UpdatePlayer()
+void GameManager::updatePlayer()
 {
-	player.update();
+	player->update();
 }
 
-void GameManager::DrawPlayer()
+void GameManager::drawPlayer()
 {
-	window.draw(player.getSprite());
+	window.draw(player->getSprite());
 }
 
-void GameManager::InitializeFont()
+void GameManager::initializeFont()
 {
 	if (font.loadFromFile("Fonts/Open24DisplaySt.ttf"))
 	{
@@ -107,37 +128,37 @@ void GameManager::InitializeFont()
 	}
 }
 
-void GameManager::SetHud()
+void GameManager::setHud()
 {
 	std::stringstream ss;
 	ss << "Score: " << score << "   Lives: " << lives;
 	hud.setString(ss.str());
 }
 
-void GameManager::DrawHud()
+void GameManager::drawHud()
 {
 	window.draw(hud);
 }
 
-void GameManager::AddScore()
+void GameManager::addScore()
 {
 	score++;
-	SetHud();
+	setHud();
 }
 
-void GameManager::ReduceLives()
+void GameManager::reduceLives()
 {
 	if (lives - 1 > 0)
 	{
 		lives--;
-		SetHud();
+		setHud();
 		return;
 	}
 	else
-		GameOver();
+		gameOver();
 }
 
-void GameManager::GameOver()
+void GameManager::gameOver()
 {
 	gameIsOver = true;
 

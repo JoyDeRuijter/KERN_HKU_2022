@@ -27,6 +27,18 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Roaduser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CarNPC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CarPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pedestrian.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -36,6 +48,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Roaduser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CarNPC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CarPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pedestrian.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

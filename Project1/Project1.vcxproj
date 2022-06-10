@@ -152,14 +152,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
+    <ClCompile Include="CarNPC.cpp" />
+    <ClCompile Include="CarPlayer.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pedestrian.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Roaduser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h" />
+    <ClInclude Include="CarNPC.h" />
+    <ClInclude Include="CarPlayer.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Pedestrian.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Roaduser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
