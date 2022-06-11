@@ -4,6 +4,7 @@
 #include "Car.h"
 #include "CarNPC.h"
 #include "CarPlayer.h"
+#include "Pedestrian.h"
 
 using namespace sf;
 
@@ -12,9 +13,12 @@ class GameManager
 	private:
 		std::vector<CarNPC*> carNPCs;
 		int carNPCAmount = 2;
+
+		std::vector<Pedestrian*> pedestrians;
+		int pedestrianAmount = 1;
 		
 		int score = 0;
-		int lives = 50;
+		int lives = 12;
 		Text hud;
 		Font font;
 
@@ -35,12 +39,21 @@ class GameManager
 		void initializeRenderWindow();
 		RenderWindow& getRenderWindow();
 		void drawBackground();
+
 		void deleteCarNPC(CarNPC* carNPC);
 		void addCarNPC();
 		void updateCarNPCs();
 		void drawCarNPCs();
 		void manageAmountOfCarNPCs();
+
+		void deletePedestrian(Pedestrian* pedestrian);
+		void addPedestrian();
+		void updatePedestrians();
+		void drawPedestrians();
+		void manageAmountOfPedestrians();
+
 		void checkCollisions();
+
 		CarPlayer* player;
 		void initializePlayer();
 		void updatePlayer();

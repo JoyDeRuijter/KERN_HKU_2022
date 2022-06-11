@@ -3,7 +3,12 @@
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
-class Pedestrian 
+class Pedestrian : public Roaduser
 {
+	private:
+
+	public:
+		Pedestrian();
+		void update() override;
 };
 

@@ -10,6 +10,7 @@ GameManager::GameManager()
 
 	setHud();
 	manageAmountOfCarNPCs();
+	manageAmountOfPedestrians();
 }
 
 void GameManager::draw()
@@ -17,6 +18,7 @@ void GameManager::draw()
 	drawBackground();
 	drawHud();
 	drawCarNPCs();
+	drawPedestrians();
 	drawPlayer();
 }
 
@@ -24,6 +26,7 @@ void GameManager::update()
 {
 	checkCollisions();
 	updateCarNPCs();
+	updatePedestrians();
 	updatePlayer();
 }
 
@@ -82,6 +85,37 @@ void GameManager::manageAmountOfCarNPCs()
 {
 	while (carNPCs.size() < carNPCAmount)
 		addCarNPC();
+}
+
+void GameManager::deletePedestrian(Pedestrian* pedestrian)
+{
+	pedestrians.erase(std::remove(pedestrians.begin(), pedestrians.end(), pedestrian), pedestrians.end());
+	manageAmountOfPedestrians();
+}
+
+void GameManager::addPedestrian()
+{
+	Pedestrian* pedestrian = new Pedestrian();
+	//pedestrian->initializeLanePositions(); change this into a function that determines the direction and start x
+	pedestrians.push_back(pedestrian);
+}
+
+void GameManager::updatePedestrians()
+{
+	for (int i = 0; i < pedestrians.size(); i++)
+		pedestrians[i]->update();
+}
+
+void GameManager::drawPedestrians()
+{
+	for (int i = 0; i < pedestrians.size(); i++)
+		window.draw(pedestrians[i]->getSprite());
+}
+
+void GameManager::manageAmountOfPedestrians()
+{
+	while (pedestrians.size() < pedestrianAmount)
+		addPedestrian();
 }
 
 void GameManager::checkCollisions()
