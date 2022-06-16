@@ -24,5 +24,5 @@ float Vector2D::magnitude()
 
 float Vector2D::distance(Vector2D _otherVector2)
 {
-	this->subtract(_otherVector2).magnitude();	
+	return this->subtract(_otherVector2).magnitude();	
 }

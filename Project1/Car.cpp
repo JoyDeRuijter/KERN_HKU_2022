@@ -5,6 +5,7 @@ Car::Car() : Roaduser()
 {
 	currentLane = startLane;
 	initializeLanePositions();
+	rigidbody = Rigidbody(position, 1, 56, 100, 0.8f);
 }
 
 void Car::initializeLanePositions()

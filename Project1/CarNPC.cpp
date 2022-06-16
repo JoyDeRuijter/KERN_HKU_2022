@@ -2,8 +2,7 @@
 
 CarNPC::CarNPC() : Car()
 {
-	position.x = getStartLane();
-	position.y = 90;
+	position = Vector2D(getStartLane(), 90);
 	texturePath = "Textures/Player2.png";
 	initializeTextureAndSprite();
 }

@@ -2,9 +2,9 @@
 
 Pedestrian::Pedestrian() : Roaduser()
 {
-	position.x = 500;
-	position.y = 500;
+	position = Vector2D(500, 500);
 	texturePath = "Textures/Pedestrian.png";
+	rigidbody = Rigidbody(position, 1, 57, 42, 0.8f);
 	initializeTextureAndSprite();
 }
 

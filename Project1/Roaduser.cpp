@@ -24,7 +24,8 @@ Sprite& Roaduser::getSprite()
 	return roaduserSprite;
 }
 
-void Roaduser::update()
+void Roaduser::update() 
 {
-	roaduserSprite.setPosition(position);
+	Vector2f newPosition = Vector2f(position.x, position.y);
+	roaduserSprite.setPosition(newPosition);
 }

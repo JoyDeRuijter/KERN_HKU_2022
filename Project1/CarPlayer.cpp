@@ -4,8 +4,7 @@ CarPlayer::CarPlayer() : Car()
 {
 	startLane = 1;
 	currentLane = startLane;
-	position.x = getLanePosition();
-	position.y = 648;
+	position = Vector2D(getLanePosition(), 648);
 	texturePath = "Textures/Player1.png";
 	initializeTextureAndSprite();
 }

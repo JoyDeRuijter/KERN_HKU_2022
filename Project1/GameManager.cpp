@@ -128,7 +128,7 @@ void GameManager::checkCollisions()
 			addScore();
 		}
 
-		if (carNPCs[i]->getPosition().intersects(player->getPosition()))
+		if (carNPCs[i].rigidbody.collider.isTouching(player->rigidbody->collider))
 		{
 			reduceLives();
 			deleteCarNPC(carNPCs[i]);
