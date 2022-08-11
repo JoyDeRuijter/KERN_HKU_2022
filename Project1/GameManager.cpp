@@ -1,3 +1,5 @@
+// Joy de Ruijter - 2022
+
 #include "GameManager.h"
 #include "Player.h"
 #include "CarNPC.h"
@@ -6,227 +8,18 @@
 
 using namespace sf;
 
-//GameManager::GameManager()
-//{
-//	initializeRenderWindow();
-//	initializePlayer();
-//	initializeFont();
-//
-//	setHud();
-//	manageAmountOfCarNPCs();
-//	manageAmountOfPedestrians();
-//}
-//
-//void GameManager::draw()
-//{
-//	drawBackground();
-//	drawHud();
-//	drawCarNPCs();
-//	drawPedestrians();
-//	drawPlayer();
-//}
-//
-//void GameManager::update()
-//{
-//	checkCollisions();
-//	updateCarNPCs();
-//	updatePedestrians();
-//	updatePlayer();
-//}
-//
-//void GameManager::initializeRenderWindow()
-//{
-//	windowWidth = 1024;
-//	windowHeight = 768;
-//
-//	if (backgroundTexture.loadFromFile("Textures/Road.png"))
-//	{
-//		backgroundTexture.setSmooth(false);
-//		backgroundTexture.setRepeated(false);
-//
-//		backgroundSprite.setTexture(backgroundTexture);
-//	}
-//
-//	window.create(VideoMode(windowWidth, windowHeight), "Speed Racer - Joy de Ruijter");
-//}
-//
-//RenderWindow& GameManager::getRenderWindow()
-//{
-//	return window;
-//}
-//
-//void GameManager::drawBackground()
-//{
-//	window.draw(backgroundSprite);
-//}
-//
-//void GameManager::deleteCarNPC(CarNPC* carNPC)
-//{
-//	carNPCs.erase(std::remove(carNPCs.begin(), carNPCs.end(), carNPC), carNPCs.end());
-//	manageAmountOfCarNPCs();
-//}
-//
-//void GameManager::addCarNPC()
-//{
-//	CarNPC* carNPC = new CarNPC();
-//	carNPC->initializeLanePositions();
-//	carNPCs.push_back(carNPC);
-//}
-//
-//void GameManager::updateCarNPCs()
-//{
-//	for (int i = 0; i < carNPCs.size(); i++)
-//		carNPCs[i]->update();
-//}
-//
-//void GameManager::drawCarNPCs()
-//{
-//	for (int i = 0; i < carNPCs.size(); i++)
-//		window.draw(carNPCs[i]->getSprite());
-//}
-//
-//void GameManager::manageAmountOfCarNPCs()
-//{
-//	while (carNPCs.size() < carNPCAmount)
-//		addCarNPC();
-//}
-//
-//void GameManager::deletePedestrian(Pedestrian* pedestrian)
-//{
-//	pedestrians.erase(std::remove(pedestrians.begin(), pedestrians.end(), pedestrian), pedestrians.end());
-//	manageAmountOfPedestrians();
-//}
-//
-//void GameManager::addPedestrian()
-//{
-//	Pedestrian* pedestrian = new Pedestrian();
-//	//pedestrian->initializeLanePositions(); change this into a function that determines the direction and start x
-//	pedestrians.push_back(pedestrian);
-//}
-//
-//void GameManager::updatePedestrians()
-//{
-//	for (int i = 0; i < pedestrians.size(); i++)
-//		pedestrians[i]->update();
-//}
-//
-//void GameManager::drawPedestrians()
-//{
-//	for (int i = 0; i < pedestrians.size(); i++)
-//		window.draw(pedestrians[i]->getSprite());
-//}
-//
-//void GameManager::manageAmountOfPedestrians()
-//{
-//	while (pedestrians.size() < pedestrianAmount)
-//		addPedestrian();
-//}
-//
-//void GameManager::checkCollisions()
-//{
-//	for (int i = 0; i < carNPCs.size(); i++)
-//	{
-//		if (carNPCs[i]->getPosition().top > windowHeight)
-//		{
-//			deleteCarNPC(carNPCs[i]);
-//			addScore();
-//		}
-//
-//		if (carNPCs[i]->rigidbody.collider->isTouching(player->rigidbody.collider))
-//		{
-//			reduceLives();
-//			deleteCarNPC(carNPCs[i]);
-//		}
-//	}
-//}
-//
-//void GameManager::initializePlayer()
-//{
-//	player = new CarPlayer();
-//}
-//
-//void GameManager::updatePlayer()
-//{
-//	player->update();
-//}
-//
-//void GameManager::drawPlayer()
-//{
-//	window.draw(player->getSprite());
-//}
-//
-//void GameManager::initializeFont()
-//{
-//	if (font.loadFromFile("Fonts/Open24DisplaySt.ttf"))
-//	{
-//		hud.setFont(font);
-//		hud.setCharacterSize(60);
-//		hud.setFillColor(Color::White);
-//		hud.setPosition(10,10);
-//	}
-//}
-//
-//void GameManager::setHud()
-//{
-//	std::stringstream ss;
-//	ss << "Score: " << score << "   Lives: " << lives;
-//	hud.setString(ss.str());
-//}
-//
-//void GameManager::drawHud()
-//{
-//	window.draw(hud);
-//}
-//
-//void GameManager::addScore()
-//{
-//	score++;
-//	setHud();
-//}
-//
-//void GameManager::reduceLives()
-//{
-//	if (lives - 1 > 0)
-//	{
-//		lives--;
-//		setHud();
-//		return;
-//	}
-//	else
-//		gameOver();
-//}
-//
-//void GameManager::gameOver()
-//{
-//	gameIsOver = true;
-//
-//	std::stringstream ss;
-//	ss << "GAME OVER";
-//	hud.setString(ss.str());
-//
-//	window.clear(Color(0, 0, 0, 255));
-//}
-
 GameManager::GameManager()
 {
-	windowWidth = 960;
-	windowHeight = 800;
-	multiplier = 10;
 	lives = 3;
 	score = 0;
-
-	player = new CarPlayer(windowWidth/2, windowHeight - 140, 0);
-
-	if (!backgroundText.loadFromFile("Textures/Achtergrond.png")) {
-		cout << "Could not load texture" << endl;
-		return;
-	}
-	background.setTexture(backgroundText);
+	multiplier = 10;
 }
 
 void GameManager::start()
 {
-	initializeGame();
+	initializeBackground();
+	initializePlayer();
+	initializeFont();
 }
 
 void GameManager::update(float _time)
@@ -260,8 +53,10 @@ void GameManager::update(float _time)
 	if (isStillPlaying())
 	{
 		player->update(_time);
-		manageCarNPCs(_time);
-		scrollingBackground();
+		manageCarNPCs();
+		updateCarNPCs(_time);
+		checkCollisions();
+		backgroundScrolling();
 		draw();
 	}
 	else
@@ -278,13 +73,33 @@ void GameManager::draw()
 	GetWindow().display();
 }
 
-void GameManager::initializeGame()
+void GameManager::initializePlayer()
 {
-	window.create(VideoMode(windowWidth, windowHeight), "Joy de Ruijter - Kernmodule GDEV");
+	player = new CarPlayer(windowWidth / 2, windowHeight - 140, 0);
+}
+
+void GameManager::initializeBackground()
+{
+	windowWidth = 960;
+	windowHeight = 800;
+
+	if (backgroundTexture.loadFromFile("Textures/Achtergrond.png"))
+	{
+		backgroundTexture.setSmooth(false);
+		backgroundTexture.setRepeated(false);
+		background.setTexture(backgroundTexture);
+	}
+
+	window.create(VideoMode(windowWidth, windowHeight), "Speed Racer - Joy de Ruijter");
 	background.setPosition(0, -windowHeight);
 }
 
-void GameManager::scrollingBackground()
+RenderWindow& GameManager::GetWindow()
+{
+	return window;
+}
+
+void GameManager::backgroundScrolling() // Handle the scrolling of the background image
 {
 	Vector2D backgroundPosition = Vector2D(background.getPosition().x, background.getPosition().y);
 	player->rigidbody->forceForward = player->rigidbody->addForce(player->rigidbody->forceForward, multiplier);
@@ -294,80 +109,98 @@ void GameManager::scrollingBackground()
 		background.setPosition(0, -windowHeight);
 }
 
-void GameManager::drawRoadusers()
+void GameManager::drawRoadusers() // Draw all roadusers on the screen
 {
+	// Draw player
 	window.draw(player->getSprite());
+
+	// Draw car NPCs
 	for (int i = 0; i < carNPCs.size(); i++)
 		window.draw(carNPCs[i]->getSprite());
-
-	//add pedestrians here
 }
 
-void GameManager::spawnCarNPCs()
+void GameManager::addCarNPC() // Add new carNPC to list of carNPCs
 {
-	CarNPC* carNPC = new CarNPC(0, 0, 70 + multiplier);
+	CarNPC* carNPC = new CarNPC(0, 0, 75 + multiplier);
 	carNPCs.push_back(carNPC);
 }
 
-void GameManager::manageCarNPCs(float _time)
+void GameManager::manageCarNPCs() // Make sure there is always one carNPC in the screen
 {
-	float amountOfCarNPCs = 1;
-	while (carNPCs.size() < amountOfCarNPCs)
-		spawnCarNPCs();
+	while (carNPCs.size() < 1)
+		addCarNPC();
+}
 
+void GameManager::updateCarNPCs(float _time) // Updates all carNPCs in the list
+{
+	for (int i = 0; i < carNPCs.size(); i++)
+		carNPCs[i]->update(_time);
+}
+
+void GameManager::checkCollisions() // Checks all collisions between carNPCs and the player, and between carNPCs and the end of the screen
+{
 	for (int i = 0; i < carNPCs.size(); i++)
 	{
-		carNPCs[i]->update(_time);
 		if (carNPCs[i]->getPosition().top > windowHeight)
 		{
-			updateMultiplier();
-			score++;
 			deleteCarNPC(carNPCs[i]);
+			addScore();
 			return;
 		}
 
 		if (carNPCs[i]->getPosition().isTouching(player->getPosition()))
 		{
-			lives--;
+			reduceLives();
 			deleteCarNPC(carNPCs[i]);
 			return;
 		}
 	}
 }
 
-void GameManager::deleteCarNPC(CarNPC* _carNPC)
+void GameManager::deleteCarNPC(CarNPC* _carNPC) // Delete the given carNPC from the list of carNPCs
 {
 	carNPCs.erase(remove(carNPCs.begin(), carNPCs.end(), _carNPC), carNPCs.end());
+	updateMultiplier();
 }
 
-void GameManager::updateMultiplier()
+void GameManager::updateMultiplier() // Increase the game multiplier
 {
 	multiplier += 20;
 }
 
-void GameManager::displayScore()
+void GameManager::addScore() // Increase the score
+{
+	score++;
+}
+
+void GameManager::reduceLives() // Decrease the lives
+{
+	lives--;
+}
+
+void GameManager::initializeFont()
+{
+	if (font.loadFromFile("Fonts/Open24DisplaySt.ttf"))
+	{
+		livesText.setFont(font);
+		scoreText.setFont(font);
+		gameoverText.setFont(font);
+	}
+}
+
+void GameManager::displayScore() // Create and display the top hud-bar that shows the lives and score counters
 {
 	RectangleShape bg;
 	bg.setFillColor(Color::Black);
 	bg.setSize(Vector2f(windowWidth, 60));
 
-	Font font;
-	if (!font.loadFromFile("Fonts/Open24DisplaySt.ttf"))
-	{
-		cout << "Could not load font" << endl;
-		return;
-	}
-	Text livesText;
-	livesText.setFont(font);
 	livesText.setCharacterSize(50);
 	livesText.setPosition(20, 0);
 	livesText.setFillColor(sf::Color::White);
 	livesText.setString("lives: " + to_string(lives));
 
-	Text scoreText;
-	scoreText.setFont(font);
 	scoreText.setCharacterSize(50);
-	scoreText.setPosition(480, 0);
+	scoreText.setPosition(770, 0);
 	scoreText.setFillColor(sf::Color::White);
 	scoreText.setString("score: " + to_string(score));
 
@@ -376,29 +209,20 @@ void GameManager::displayScore()
 	window.draw(scoreText);
 }
 
-void GameManager::displayEndScreen()
+void GameManager::displayEndScreen() // Create and display the endscreen with the game over text and final score
 {
 	GetWindow().clear(Color::Black);
-	Font font;
-	if (!font.loadFromFile("Fonts/Open24DisplaySt.ttf"))
-	{
-		cout << "Could not load font" << endl;
-		return;
-	}
-	Text gameoverText;
-	gameoverText.setFont(font);
+	
 	gameoverText.setOrigin(175, 75 / 2);
 	gameoverText.setPosition(Vector2f((windowWidth / 2) - 30, (windowHeight / 2) - 75));
 	gameoverText.setCharacterSize(75);
-	gameoverText.setFillColor(sf::Color::Red);
+	gameoverText.setFillColor(sf::Color::White);
 	gameoverText.setString("GAME OVER");
 
-	Text scoreText;
-	scoreText.setFont(font);
 	scoreText.setOrigin(175, 75 / 2);
-	scoreText.setPosition(Vector2f((windowWidth / 2) - 30, (windowHeight / 2)));
+	scoreText.setPosition(Vector2f((windowWidth / 2) - 30, (windowHeight / 2 + 75)));
 	scoreText.setCharacterSize(75);
-	scoreText.setFillColor(sf::Color::Red);
+	scoreText.setFillColor(sf::Color::White);
 	scoreText.setString("end score: " + to_string(score));
 
 	window.draw(scoreText);
@@ -406,7 +230,7 @@ void GameManager::displayEndScreen()
 	GetWindow().display();
 }
 
-bool GameManager::isStillPlaying()
+bool GameManager::isStillPlaying() // Returns true when the player has more than zero lives, otherwise returns false
 {
 	if (lives <= 0)
 		return false;
@@ -414,7 +238,3 @@ bool GameManager::isStillPlaying()
 	return true;
 }
 
-RenderWindow& GameManager::GetWindow()
-{
-	return window;
-}

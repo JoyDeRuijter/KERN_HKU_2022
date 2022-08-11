@@ -1,3 +1,5 @@
+// Joy de Ruijter - 2022
+
 #include "Collider.h"
 
 Collider::Collider(Vector2D _position, Vector2D _size)
@@ -6,7 +8,6 @@ Collider::Collider(Vector2D _position, Vector2D _size)
 	left = _position.x;
 	height = _size.y;
 	width = _size.x;
-	isTouchingSomething = false;
 }
 
 Collider::Collider(float _top, float _left, float _height, float _width)
@@ -15,10 +16,9 @@ Collider::Collider(float _top, float _left, float _height, float _width)
 	left = _left;
 	height = _height;
 	width = _width;
-	isTouchingSomething = false;
 }
 
-bool Collider::isTouching(Collider _collider)
+bool Collider::isTouching(Collider _collider) // Checks if this collider is touching the provided collider
 {
 	// this collider
 	float thisMinX = left; //left border of collider

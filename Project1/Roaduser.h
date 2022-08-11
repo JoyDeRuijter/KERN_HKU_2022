@@ -1,3 +1,5 @@
+// Joy de Ruijter - 2022
+
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Rigidbody.h"
@@ -5,6 +7,8 @@
 #include "Collider.h"
 
 using namespace sf;
+
+class Rigidbody;
 
 class Roaduser
 {

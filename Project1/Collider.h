@@ -1,3 +1,5 @@
+// Joy de Ruijter - 2022
+
 #pragma once
 #include "Vector2D.h"
 class Collider
@@ -10,7 +12,6 @@ class Collider
 		float left;
 		float height;
 		float width;
-		bool isTouchingSomething;
 		
 		bool isTouching(Collider _collider);
 };

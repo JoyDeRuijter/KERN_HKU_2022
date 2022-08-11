@@ -1,3 +1,5 @@
+// Joy de Ruijter - 2022
+
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "GameManager.h"
@@ -16,8 +18,8 @@ int main()
 
     while (gamemanager.GetWindow().isOpen())
     {
-        float dt = deltaClock.restart().asSeconds();
+        float time = deltaClock.restart().asSeconds();
 
-        gamemanager.update(dt);
+        gamemanager.update(time);
     }
 }

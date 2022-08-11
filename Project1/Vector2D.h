@@ -1,3 +1,5 @@
+// Joy de Ruijter - 2022
+
 #pragma once
 class Vector2D
 {
