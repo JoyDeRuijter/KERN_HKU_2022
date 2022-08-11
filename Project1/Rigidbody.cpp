@@ -1,16 +1,36 @@
 #include "Rigidbody.h"
+#include <SFML/Graphics.hpp>
 
-Rigidbody::Rigidbody() {
-	init();
+using namespace sf;
+
+Rigidbody::Rigidbody() 
+{
+	mass = 1;
+	frictionCo = 0.8f;	//Rubber on concrete
+	gravity = 9.81f;
 }
 
-void Rigidbody::init(float _mass, int _width, int _height, float _frictionCo)
+
+float Rigidbody::calculateAcceleration(float _currentVelocity, float _mass, float _force)
 {
-	mass = _mass;
-	collider = new Collider(_width, _height, _frictionCo);
+	float necessaryForce = calculateFriction(_mass);
+	return (_force - necessaryForce * _currentVelocity)/_mass;
+
 }
 
-void Rigidbody::addForce(Roaduser _roaduser, float _force)
+float Rigidbody::calculateFriction(float _mass)
 {
-	// add force
+	return _mass * gravity * frictionCo;
+}
+
+float Rigidbody::calculateVelocity(float _currentVelocity, float _mass, float _force, float _time)
+{
+	float acceleration = calculateAcceleration(_currentVelocity, _mass, _force);
+	return _currentVelocity + acceleration * _time;
+}
+
+float Rigidbody::addForce(float _axis, float _force)
+{
+	_axis += _force;
+	return _axis;
 }

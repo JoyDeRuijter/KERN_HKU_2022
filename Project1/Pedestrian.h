@@ -5,10 +5,10 @@ using namespace sf;
 
 class Pedestrian : public Roaduser
 {
-	private:
+	//private:
 
-	public:
-		Pedestrian();
-		void update() override;
+	//public:
+	//	Pedestrian();
+	//	void update() override;
 };
 

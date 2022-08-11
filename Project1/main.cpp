@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
-#include "Car.h"
 #include "GameManager.h"
 #include <sstream>
 #include <iostream>
@@ -8,39 +7,17 @@
 
 int main()
 {
-    GameManager gameManager;
+    srand(time(0));
 
-    while (gameManager.getRenderWindow().isOpen())
+    Clock deltaClock;
+
+    GameManager gamemanager;
+    gamemanager.start();
+
+    while (gamemanager.GetWindow().isOpen())
     {
-        Event event;
-        while (gameManager.getRenderWindow().pollEvent(event))
-        {
-            if (event.type == Event::Closed)
-                gameManager.getRenderWindow().close();
+        float dt = deltaClock.restart().asSeconds();
 
-            if (event.type == sf::Event::KeyPressed)
-            {
-                if (event.key.code == sf::Keyboard::Left && !gameManager.gameIsOver)
-                    gameManager.player->moveLeft();
-
-                else if (event.key.code == sf::Keyboard::Right && !gameManager.gameIsOver)
-                    gameManager.player->moveRight();
-
-                else if (Keyboard::isKeyPressed(Keyboard::Escape))
-                    gameManager.getRenderWindow().close();
-            }
-        }
-
-        if (gameManager.gameIsOver)
-            continue;
-
-        gameManager.update();
-
-        gameManager.getRenderWindow().clear(Color(26, 128, 182, 255));
-        
-        gameManager.draw();
-
-        gameManager.getRenderWindow().display();
+        gamemanager.update(dt);
     }
-    return 0;
 }

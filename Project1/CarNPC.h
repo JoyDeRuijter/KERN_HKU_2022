@@ -1,14 +1,19 @@
 #pragma once
-#include "Car.h"
+#include "Roaduser.h"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
 
-class CarNPC : public Car
+class CarNPC : public Roaduser
 {
 	public:
-		CarNPC();
-		float getStartLane();
-		void update() override;
+		CarNPC(float _startX, float _startY, float _force);
+
+		float direction;
+
+		void hitEnd();
+		void update(float _time);
+		float setStartPosition();
+		float setDirection();
 };
 

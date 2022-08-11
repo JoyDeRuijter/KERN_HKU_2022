@@ -1,6 +1,9 @@
 #include "Vector2D.h"
 #include <Cmath>
 
+Vector2D::Vector2D()
+{}
+
 Vector2D::Vector2D(float _x, float _y)
 {
 	x = _x;

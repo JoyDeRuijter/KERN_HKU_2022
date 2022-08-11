@@ -3,6 +3,8 @@ using namespace sf;
 
 Roaduser::Roaduser(){}
 
+Roaduser::Roaduser(float _startX, float _startY, float _force){}
+
 void Roaduser::initializeTextureAndSprite()
 {
 	if (roaduserTexture.loadFromFile(texturePath))
@@ -14,18 +16,12 @@ void Roaduser::initializeTextureAndSprite()
 	}
 }
 
-FloatRect Roaduser::getPosition()
+Collider Roaduser::getPosition()
 {
-	return roaduserSprite.getGlobalBounds();
+	return Collider(Vector2D(position), Vector2D(size));
 }
 
 Sprite& Roaduser::getSprite()
 {
 	return roaduserSprite;
-}
-
-void Roaduser::update() 
-{
-	Vector2f newPosition = Vector2f(position.x, position.y);
-	roaduserSprite.setPosition(newPosition);
 }

@@ -1,9 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Rigidbody.h"
-using namespace sf;
+#include "Vector2D.h"
+#include "Collider.h"
 
-class Rigidbody;
+using namespace sf;
 
 class Roaduser
 {
@@ -11,18 +12,19 @@ class Roaduser
 		Texture roaduserTexture;
 
 	protected:
-		float xVelocity = .2f;
-		float yVelocity = .2f;
-		Vector2D position;
+		Vector2D size;
 		Sprite roaduserSprite;
 		String texturePath;
 
 	public:
 		Roaduser();
-		Rigidbody rigidbody;
+		Roaduser(float _startX, float _startY, float _force);
+
+		Rigidbody* rigidbody;
+		Vector2D position;
+
 		void initializeTextureAndSprite();
-		FloatRect getPosition();
+		Collider getPosition();
 		Sprite& getSprite();
-		virtual void update();
 };
 

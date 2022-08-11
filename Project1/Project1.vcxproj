@@ -151,7 +151,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Car.cpp" />
     <ClCompile Include="CarNPC.cpp" />
     <ClCompile Include="CarPlayer.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -164,7 +163,6 @@
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Car.h" />
     <ClInclude Include="CarNPC.h" />
     <ClInclude Include="CarPlayer.h" />
     <ClInclude Include="Collider.h" />

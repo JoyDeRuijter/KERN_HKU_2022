@@ -1,7 +1,7 @@
 #pragma once
 #include <Vector>
+#include <SFML/Graphics.hpp>
 #include "Roaduser.h"
-#include "Car.h"
 #include "CarNPC.h"
 #include "CarPlayer.h"
 #include "Pedestrian.h"
@@ -10,7 +10,7 @@ using namespace sf;
 
 class GameManager
 {
-	private:
+	/*private:
 		std::vector<CarNPC*> carNPCs;
 		int carNPCAmount = 2;
 
@@ -64,6 +64,42 @@ class GameManager
 		void drawHud();
 		void addScore();
 		void reduceLives();
-		void gameOver();
+		void gameOver();*/
+
+	private:
+		int windowWidth;
+		int windowHeight;
+		float multiplier;
+		RenderWindow window;
+		Sprite background;
+		Texture backgroundText;
+		CarPlayer* player;
+		std::vector<CarNPC*> carNPCs;
+		int lives;
+		int score;
+
+	public:
+		GameManager();
+
+		float time;
+
+		void start();
+		void update(float _time);
+		void draw();
+
+		void initializeGame();
+		void scrollingBackground();
+		void drawRoadusers();
+
+		void spawnCarNPCs();
+		void manageCarNPCs(float _time);
+		void deleteCarNPC(CarNPC* _carNPC);
+		void updateMultiplier();
+
+		void displayScore();
+		void displayEndScreen();
+
+		bool isStillPlaying();
+		RenderWindow& GetWindow();
 };
 

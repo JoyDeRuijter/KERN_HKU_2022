@@ -1,14 +1,25 @@
 #pragma once
-#include "Car.h"
+#include "Roaduser.h"
 #include <SFML/Graphics.hpp>
-using namespace sf;
+#include "Rigidbody.h"
+#include "Vector2D.h"
+#include "Collider.h"
 
-class CarPlayer : public Car
+using namespace sf;
+using namespace std;
+
+class CarPlayer : public Roaduser
 {
+	private:
+		RenderWindow renderWindow;
+
 	public:
-		CarPlayer();
-		float getLanePosition();
+		CarPlayer(float _startX, float _startY, float _force);
+
+		float playerSpeed;
+		
 		void moveLeft();
 		void moveRight();
+		void update(float _time);
 };
 

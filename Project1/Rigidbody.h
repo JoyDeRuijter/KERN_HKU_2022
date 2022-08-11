@@ -7,10 +7,19 @@ class Roaduser;
 class Rigidbody
 {
 	public:
-	Rigidbody();
+		Rigidbody();
+
 		float mass;
-		Collider* collider;
-		void addForce(Roaduser _roaduser, float _force);
-		void init(float _mass, int _width, int _height, float _frictionCo);
+		float forceForward;
+		float forceSideways;
+		float xVelocity;
+		float yVelocity;
+		float frictionCo;
+		float gravity;
+		
+		float calculateAcceleration(float _currentVelocity, float _mass, float _force);
+		float calculateFriction(float _mass);
+		float calculateVelocity(float _currentVelocity, float _mass, float _force, float _time);
+		float addForce(float _axis, float _force);
 };
 
