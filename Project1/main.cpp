@@ -1,24 +1,25 @@
+// Joy de Ruijter - 2022
+
 #include <SFML/Graphics.hpp>
+#include "Player.h"
+#include "GameManager.h"
+#include <sstream>
+#include <iostream>
+#include <cstdlib>
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    srand(time(0));
 
-    while (window.isOpen())
+    Clock deltaClock;
+
+    GameManager gamemanager;
+    gamemanager.start();
+
+    while (gamemanager.GetWindow().isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        float time = deltaClock.restart().asSeconds();
 
-        window.clear();
-        window.draw(shape);
-        window.display();
+        gamemanager.update(time);
     }
-
-    return 0;
 }
