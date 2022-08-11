@@ -12,9 +12,6 @@ using namespace std;
 
 class CarPlayer : public Roaduser
 {
-	private:
-		RenderWindow renderWindow;
-
 	public:
 		CarPlayer(float _startX, float _startY, float _force);
 
